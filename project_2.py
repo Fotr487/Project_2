@@ -5,16 +5,26 @@ from timeit import default_timer as timer
 def number_checking(player, computer):
     bulls = 0
     cows = 0
+    repetition = dict()
     if len(player) == len(computer) and player.isdigit():
-        for position_p, letter_p in enumerate(player):
-            if letter_p in computer:
-                cows += 1
-                for position_c, letter_c in enumerate(computer):
-                    if letter_p == letter_c and position_p == position_c:
-                        bulls += 1
-                        cows -= 1
+        if player[0] != "0":
+            for position_p, letter_p in enumerate(player):
+                if letter_p in repetition.keys():
+                    repetition[letter_p] = repetition[letter_p] + 1
+                    return print("SORRY YOUR NUMBER HAS DUPLICATES. PLEASE INPUT NEW ONE.")
+                else:
+                    repetition[letter_p] = 1
+                if letter_p in computer:
+                    cows += 1
+                    for position_c, letter_c in enumerate(computer):
+                        if letter_p == letter_c and position_p == position_c:
+                            bulls += 1
+                            cows -= 1
 
-        print(f"{bulls} BULLS, {cows} COWS")
+            print(f"{bulls} BULLS, {cows} COWS")
+        else:
+            return print("""SORRY YOUR NUMBER STARTS WITH 0THAT IS WRONG. 
+PLEASE INPUT NEW ONE.""")
     else:
         if len(player) > len(computer) and player.isdigit():
             print(f"THERE ARE MORE NUMBERS IN YOU INPUT THAN THERE IS IN THE SECRET NUMBER."
@@ -24,26 +34,6 @@ def number_checking(player, computer):
                   f"TRY AGAIN ...")
         elif not player.isdigit():
             print("YOUR INPUT IS INVALID. (ONLY NUMBERS)")
-
-
-def beg_number(comp):   # tady jsem si jaksi vymyslel funkci, ktera mela radit hraci (je mi líto jí smazat)
-    dig_not = 0
-    print("SPECIALITIES OF THIS WORD:")
-    if comp[0] == "0":
-        print("THIS NUMBER STARTS WITH 0.")
-    repetition = dict()
-    for let in comp:
-        if not let.isdigit():
-            dig_not += 1
-        if let in repetition.keys():
-            repetition[let] = repetition[let] + 1
-        else:
-            repetition[let] = 1
-    if dig_not > 0:
-        print(f"THERE IS/ARE {dig_not} NOT-DIGIT CHARACTER/S")
-    for one in repetition:
-        if repetition.get(one) > 1:
-            print(f"THERE ARE {repetition.get(one)} SAME NUMBERS.")
 
 
 def number_making():
@@ -73,7 +63,6 @@ print(f"""{SPACE}
 HELLO THERE!
 {SPACE}
 I HAVE GENERATED A RANDOM {LENGHT} DIGIT NUMBER FOR YOU.""")
-beg_number(SECRET)
 print(f"""LET'S PLAY A BULLS AND COWS GAME.
 {SPACE}""")
 start = timer()
