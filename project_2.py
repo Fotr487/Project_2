@@ -15,15 +15,20 @@ def number_checking(player, computer):
 
 
 def beg_number(comp):
+    dig_not = 0
     print("SPECIALITIES OF THIS WORD:")
     if comp[0] == "0":
         print("THIS NUMBER STARTS WITH 0.")
     repetition = dict()
     for let in comp:
+        if not let.isdigit():
+            dig_not += 1
         if let in repetition.keys():
             repetition[let] = repetition[let] + 1
         else:
             repetition[let] = 1
+    if dig_not > 0:
+        print(f"THERE IS/ARE {dig_not} NOT-DIGIT CHARACTER/S")
     for one in repetition:
         if repetition.get(one) > 1:
             print(f"THERE ARE {repetition.get(one)} SAME NUMBERS.")
@@ -31,13 +36,13 @@ def beg_number(comp):
 
 TRIES = 0
 GAME_ON = True
-LENGHT = random.randint(3, 5)
-SPACE = '-' * 60
+SPACE = '-' * 50
 SECRET = ""
+LENGHT = random.randint(3, 5)
 for number in range(1, LENGHT + 1):
     SECRET += str(random.randint(0, 9))
 
-print(SECRET)
+print(f"PSST IT IS {SECRET}")
 print(f"""{SPACE}
 HELLO THERE!
 {SPACE}
@@ -48,17 +53,15 @@ print(f"""LET'S PLAY A BULLS AND COWS GAME.
 
 while GAME_ON:
     player_in = input("ENTER A NUMBER: (IF YOU WANT TO QUIT, TYPE 'QUIT')\n")
-    if player_in.isdigit():
+    if player_in == "QUIT":
+        print(f"WELL SEE YOU NEXT TIME. THE NUMBER WAS {SECRET}")
+        quit()
+    else:
         number_checking(player_in, SECRET)
         if player_in == SECRET:
             GAME_ON = False
-    else:
-        if player_in == "QUIT":
-            print(f"WELL SEE YOU NEXT TIME. THE NUMBER WAS {SECRET}")
-            quit()
-        else:
-            print("SORRY, ONLY NUMBERS. TRY AGAIN... (THIS COST YOU ONE TRY.)")
     TRIES += 1
+    print(SPACE)
 print(f"NICE, YOU DID IT. YOU'VE GUESSED THE RIGHT NUMBER IN {TRIES} GUESSES!!")
 
 if TRIES == 1:
