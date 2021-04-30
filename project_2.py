@@ -32,12 +32,11 @@ def beg_number(comp):
 TRIES = 0
 GAME_ON = True
 LENGHT = random.randint(3, 5)
-SPACE = '-' * 20
+SPACE = '-' * 60
 SECRET = ""
 for number in range(1, LENGHT + 1):
     SECRET += str(random.randint(0, 9))
 
-print(LENGHT)
 print(SECRET)
 print(f"""{SPACE}
 HELLO THERE!
@@ -48,14 +47,17 @@ print(f"""LET'S PLAY A BULLS AND COWS GAME.
 {SPACE}""")
 
 while GAME_ON:
-    player_in = input("ENTER A NUMBER:\n")
+    player_in = input("ENTER A NUMBER: (IF YOU WANT TO QUIT, TYPE 'QUIT')\n")
     if player_in.isdigit():
         number_checking(player_in, SECRET)
         if player_in == SECRET:
             GAME_ON = False
     else:
-        print("SORRY, ONLY NUMBERS. GOODBYE...")
-        quit()
+        if player_in == "QUIT":
+            print(f"WELL SEE YOU NEXT TIME. THE NUMBER WAS {SECRET}")
+            quit()
+        else:
+            print("SORRY, ONLY NUMBERS. TRY AGAIN... (THIS COST YOU ONE TRY.)")
     TRIES += 1
 print(f"NICE, YOU DID IT. YOU'VE GUESSED THE RIGHT NUMBER IN {TRIES} GUESSES!!")
 
