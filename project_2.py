@@ -1,5 +1,7 @@
 import random
 from timeit import default_timer as timer
+from time import sleep
+import os
 
 
 def number_checking(player, computer):
@@ -27,11 +29,11 @@ def number_checking(player, computer):
 PLEASE INPUT NEW ONE.""")
     else:
         if len(player) > len(computer) and player.isdigit():
-            print(f"THERE ARE MORE NUMBERS IN YOU INPUT THAN THERE IS IN THE SECRET NUMBER."
-                  f"TRY AGAIN ...")
+            print(f"THERE ARE MORE NUMBERS IN YOU INPUT THAN "
+                  f"THERE IS IN THE SECRET NUMBER. TRY AGAIN ...")
         elif len(player) < len(computer) and player.isdigit():
-            print(f"THERE ARE LESS NUMBERS IN YOU INPUT THAN THERE IS IN THE SECRET NUMBER."
-                  f"TRY AGAIN ...")
+            print(f"THERE ARE LESS NUMBERS IN YOU INPUT THAN "
+                  f"THERE IS IN THE SECRET NUMBER. TRY AGAIN ...")
         elif not player.isdigit():
             print("YOUR INPUT IS INVALID. (ONLY NUMBERS)")
 
@@ -58,7 +60,13 @@ SPACE = '-' * 50
 LENGHT = 4  # tady by šel random generator at nemame jenom 4-mistna cisla
 SECRET = number_making()
 #
-print(f"PSST IT IS {SECRET}")
+question = input("DO YOU WANNA SEE THE SECRET WORD? 'YES' OR 'NO'\n")
+if question.lower() == "yes":
+    print(SECRET)
+    sleep(2)
+    os.system("cls")
+else:
+    os.system("cls")
 print(f"""{SPACE}
 HELLO THERE!
 {SPACE}
