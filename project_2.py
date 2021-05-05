@@ -63,7 +63,7 @@ SECRET = number_making()
 question = input("DO YOU WANNA SEE THE SECRET WORD? 'YES' OR 'NO'\n")
 if question.lower() == "yes":
     print(SECRET)
-    sleep(2)
+    sleep(1)
     os.system("cls")
 else:
     os.system("cls")
