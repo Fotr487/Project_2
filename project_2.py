@@ -13,7 +13,8 @@ def number_checking(player, computer):
             for position_p, letter_p in enumerate(player):
                 if letter_p in repetition.keys():
                     repetition[letter_p] = repetition[letter_p] + 1
-                    return print("SORRY YOUR NUMBER HAS DUPLICATES. PLEASE INPUT NEW ONE.")
+                    return print("SORRY YOUR NUMBER HAS DUPLICATES."
+                                 " PLEASE INPUT NEW ONE.")
                 else:
                     repetition[letter_p] = 1
                 if letter_p in computer:
@@ -25,7 +26,7 @@ def number_checking(player, computer):
 
             print(f"{bulls} BULLS, {cows} COWS")
         else:
-            return print("""SORRY YOUR NUMBER STARTS WITH 0THAT IS WRONG. 
+            return print("""SORRY YOUR NUMBER STARTS WITH 0THAT IS WRONG.
 PLEASE INPUT NEW ONE.""")
     else:
         if len(player) > len(computer) and player.isdigit():
@@ -76,7 +77,7 @@ print(f"""LET'S PLAY A BULLS AND COWS GAME.
 start = timer()
 while GAME_ON:
     player_in = input("ENTER A NUMBER: (IF YOU WANT TO QUIT, TYPE 'QUIT')\n")
-    if player_in == "QUIT":
+    if player_in.lower() == "quit":
         print(f"WELL SEE YOU NEXT TIME. THE NUMBER WAS {SECRET}")
         quit()
     else:
